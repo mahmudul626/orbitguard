@@ -1,0 +1,171 @@
+/* General Body Style */
+body {
+    font-family: 'Roboto Mono', monospace;
+    background: linear-gradient(135deg, #0c0c1e 0%, #1a1a2e 50%, #16213e 100%);
+    display: flex; /* Make body a flex container */
+    flex-direction: column; /* Stack children vertically */
+    min-height: 100vh;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* This is the direct child of the body tag */
+.flex-wrapper {
+    display: flex; /* This is the new flex container for main and sidebar */
+    flex-grow: 1; /* Allow this wrapper to grow and fill space */
+}
+
+/* Custom Font Class */
+.orbitron {
+    font-family: 'Orbitron', monospace;
+}
+
+/* Glow Effect */
+.glow {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+
+/* --- Main Content and Sidebar Layout (CORRECTED) --- */
+#main-content, #footer {
+    transition: padding-right 0.3s ease-in-out;
+}
+#main-content.collapsed, #footer.collapsed {
+    padding-right: 5.5rem; /* 64px, the width of the sidebar */
+}
+
+#sidebar {
+    width: 4rem; /* 64px */
+    position: fixed;
+    top: 68px; /* Height of the header */
+    right: -4rem; /* Start off-screen */
+    height: calc(100vh - 68px);
+    transition: right 0.3s ease-in-out;
+    z-index: 40; /* Ensure it's below header but above content if needed */
+}
+#sidebar.active {
+    right: 0; /* Slide into view */
+}
+
+/* Sidebar item Tooltip */
+.sidebar-item {
+    position: relative;
+}
+.sidebar-item[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 120%;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #1a1a2e;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    border: 1px solid #3b82f6;
+}
+
+/* Disabled button/icon styles */
+.disabled-btn {
+    background-color: #4b5563 !important;
+    cursor: not-allowed !important;
+    opacity: 0.6;
+}
+.disabled-icon {
+    color: #4b5563 !important;
+    cursor: not-allowed !important;
+    opacity: 0.5;
+}
+
+/* Page fade-in animation */
+.page-content {
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Scrollbar */
+#data-output::-webkit-scrollbar { width: 8px; }
+#data-output::-webkit-scrollbar-track { background: #1a1a2e; border-radius: 10px; }
+#data-output::-webkit-scrollbar-thumb { background-color: #22c55e; border-radius: 10px; border: 2px solid #1a1a2e; }
+#data-output::-webkit-scrollbar-thumb:hover { background-color: #16a34a; }
+
+/* NEW: Satellite link style */
+.satellite-link {
+    color: #a7f3d0; /* A light green color */
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.satellite-link:hover {
+    color: #34d399; /* A brighter green on hover */
+}
+
+/* NEW: Modal Styles */
+.modal-overlay {
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background-color: #1a1a2e;
+    color: #e5e7eb;
+    margin: auto;
+    padding: 24px;
+    border: 1px solid #4b5563;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: modal-fade-in 0.3s ease-out;
+}
+@keyframes modal-fade-in {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.modal-close-btn {
+    color: #9ca3af;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+    color: #fff;
+    text-decoration: none;
+}
+
+
+/* Other Styles */
+.custom-card {
+  display: flex;
+  flex-direction: column;
+}
+.earth-orbit {
+  animation: rotate 20s linear infinite;
+}
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.satellite-dot {
+  animation: pulse 2s ease-in-out infinite alternate;
+}
+@keyframes pulse {
+  from { opacity: 0.6; }
+  to { opacity: 1; }
+}
